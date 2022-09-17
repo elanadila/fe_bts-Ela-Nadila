@@ -75,9 +75,9 @@
 							</a>
 						</li>
 						<li class="nav-item">
-							<a href="{{route('cheklist')}}">
+							<a href="{{route('checklist')}}">
 								<i class="fas fa-table"></i>
-								<p>Master Cheklist</p>
+								<p>Master Checklist</p>
 							</a>
 						</li>
 					</ul>
@@ -88,7 +88,7 @@
 			<div class="content">
 				<div class="page-inner">
 					<div class="page-header">
-						<h4 class="page-title">Daftar Cheklist</h4>
+						<h4 class="page-title">Daftar Checklist</h4>
 					</div>
 					<div class="row">
 						<div class="col-md-12">
@@ -116,7 +116,7 @@
 														<span class="fw-mediumbold">
 															Tambah</span>
 														<span class="fw-light">
-															Cheklist
+															Checklist
 														</span>
 													</h5>
 													<button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -126,7 +126,7 @@
 												</div>
 												<div class="modal-body">
 													<!-- <p class="small">Create a new row using this form, make sure you fill them all</p> -->
-													<form action="{{ route('add-cheklist')}}" method="POST">
+													<form action="{{ route('add-checklist')}}" method="POST">
 														@csrf
 														<div class="row">
 															<div class="col-md-12">
@@ -166,25 +166,18 @@
 											</tfoot>
 											<tbody>
 												@php $no = 1; @endphp
-												@foreach($data as $item)
 												<tr>
 													<td>{{ $no++ }}</td>
-													<td>{{ $item['name']}}</td>
+													<td>{{ $data['name']}}</td>
 													<td>
 														<div class="form-button-action">
-															<a href="{{ route('get.edit', $item['id'])}}" type="button" data-toggle="tooltip" title="" class="btn btn-link btn-primary btn-lg" data-original-title="Edit Cheklist">
-																<i class="fa fa-edit"></i>
-															</a>
-															<a href="{{ route('get.cheklist', $item['id'])}}" type="button" data-toggle="tooltip" title="" class="btn btn-link btn-primary btn-lg" data-original-title="Detail Cheklist">
-																<i class="fa fa-eye"></i>
-															</a>
-															<button data-id="{{ $item['id']}}" data-cheklist="{{ $item['name']}}" type="button" data-toggle="tooltip" title="" class="btn btn-link btn-danger delete"  data-original-title="Hapus">
+
+															<button data-id="{{ $data['id']}}" data-checklist="{{ $data['name']}}" type="button" data-toggle="tooltip" title="" class="btn btn-link btn-danger delete"  data-original-title="Hapus">
 																<i class="fa fa-times"></i>
 															</button>
 														</div>
 													</td>
 												</tr>
-												@endforeach
 											</tbody>
 										</table>
 									</div>
@@ -269,12 +262,12 @@
 	</script>
 	<script>
 		$('.delete').click(function() {
-			var cheklistid = $(this).attr('data-id');
-			var cheklist = $(this).attr('data-cheklist');
+			var checklistid = $(this).attr('data-id');
+			var checklist = $(this).attr('data-checklist');
 
 			swal({
-				title: 'Apakah Anda Yakin Ingin Menghapus cheklist Ini?',
-				text: "Kamu akan Menghapus Data cheklist dengan Nama cheklist "+cheklist+" ",
+				title: 'Apakah Anda Yakin Ingin Menghapus checklist Ini?',
+				text: "Kamu akan Menghapus Data checklist dengan Nama checklist "+checklist+" ",
 				type: 'warning',
 				buttons: {
 					cancel: {
@@ -289,7 +282,7 @@
 				}
 			}).then((willDelete) => {
 				if (willDelete) {
-					window.location = "delete/"+cheklistid+""
+					window.location = "delete/"+checklistid+""
 					swal("Data berhasil dihapus!", {
 						icon: "success",
 						buttons: {

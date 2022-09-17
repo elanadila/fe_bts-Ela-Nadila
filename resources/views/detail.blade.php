@@ -75,9 +75,9 @@
 							</a>
 						</li>
 						<li class="nav-item">
-							<a href="{{route('cheklist')}}">
+							<a href="{{route('checklist')}}">
 								<i class="fas fa-table"></i>
-								<p>Master Cheklist</p>
+								<p>Master Checklist</p>
 							</a>
 						</li>
 					</ul>
@@ -88,7 +88,7 @@
 			<div class="content">
 				<div class="page-inner">
 					<div class="page-header">
-						<h4 class="page-title">Detail Cheklist</h4>
+						<h4 class="page-title">Detail Checklist</h4>
 					</div>
 					<div class="row">
 						<div class="col-md-12">

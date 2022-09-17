@@ -75,9 +75,9 @@
 							</a>
 						</li>
 						<li class="nav-item">
-							<a href="{{route('cheklist')}}">
+							<a href="{{route('checklist')}}">
 								<i class="fas fa-table"></i>
-								<p>Master Cheklist</p>
+								<p>Master Checklist</p>
 							</a>
 						</li>
 					</ul>
@@ -88,7 +88,7 @@
 			<div class="content">
 				<div class="page-inner">
 					<div class="page-header">
-						<h4 class="page-title">Edit Cheklist</h4>
+						<h4 class="page-title">Edit Checklist</h4>
 					</div>
 					<div class="row">
 						<div class="col-md-12">
@@ -97,14 +97,14 @@
 									<div class="card-title">Form Elements</div>
 								</div> -->
 								<div class="card-body">
-									<form action="{{ route('edit.cheklist', $data['id'])}}" method="POST">
-										@csrf
+									<form action="" method="POST">
+										
 										<div class="row">
 											<div class="col-md-6 col-lg-4">
 											
 												<div class="form-group form-group-default">
 													<label>Nama</label>
-													<input type="text" value="{{ $data['name'] }}" name="name" class="form-control" placeholder="Masukkan Nama cheklist">
+													<input type="text" value="" name="name" class="form-control" placeholder="Masukkan Nama checklist">
 												</div>
 												
 											</div>

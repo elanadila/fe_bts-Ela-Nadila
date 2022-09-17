@@ -17,15 +17,15 @@ Route::get('/', 'App\Http\Controllers\ChecklistController@index')->name('home');
 Route::get('welcome', 'App\Http\Controllers\ChecklistController@welcome')->name('welcome');
 
 Route::get('home', 'App\Http\Controllers\ChecklistController@index')->name('home');
-Route::post('add-cheklist', 'App\Http\Controllers\ChecklistController@addChecklist')->name('add-cheklist');
+Route::post('add-checklist', 'App\Http\Controllers\ChecklistController@addChecklist')->name('add-checklist');
 Route::get('getData', 'App\Http\Controllers\ChecklistController@getData')->name('checklist');
-Route::get('get-cheklist/{id}', 'App\Http\Controllers\ChecklistController@getItemCheklist')->name('get.cheklist');
+Route::get('get-checklist/{id}', 'App\Http\Controllers\ChecklistController@getItemChecklist')->name('get.checklist');
 
-Route::get('get-edit/{id}', 'App\Http\Controllers\ChecklistController@getEditCheklist')->name('get.edit');
-Route::post('update-cheklist/{id}', 'App\Http\Controllers\ChecklistController@editCheklist')->name('edit.cheklist');
+// Route::get('get-edit/{id}', 'App\Http\Controllers\ChecklistController@getEditChecklist')->name('get.checklist');
+Route::post('update-checklist/{id}', 'App\Http\Controllers\ChecklistController@editChecklist')->name('edit.checklist');
 
-Route::get('delete/{id}', 'App\Http\Controllers\ChecklistController@deleteCheklist')->name('delete.cheklist');
+Route::get('delete/{id}', 'App\Http\Controllers\ChecklistController@deleteChecklist')->name('delete.checklist');
 
 Route::get('login', 'App\Http\Controllers\ChecklistController@login')->name('login');
-Route::post('loginCheck', 'App\Http\Controllers\ChecklistController@loginCheck')->name('login.check');
+Route::post('loginCheck', 'App\Http\Controllers\ChecklistController@loginCheck')->name('loginCheck');
 

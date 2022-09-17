@@ -56,7 +56,7 @@
 									<div class="card-title">Form Elements</div>
 								</div> -->
 								<div class="card-body">
-									<form action="{{ route('login.check')}}" method="POST">
+									<form action="{{ route('loginCheck')}}" method="POST">
 										@csrf
 										<div class="row">
 											<div class="col-md-5 pl-md-0 pr-md-0">

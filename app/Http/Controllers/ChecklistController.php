@@ -10,14 +10,15 @@ class ChecklistController extends Controller
     //
     public function loginCheck(Request $request){
         $client = new Client();
+        // $token = "eyJhbGciOiJIUzUxMiJ9.eyJyb2xlcyI6W119.i2OVQdxr08dmIqwP7cWOJk5Ye4fySFUqofl-w6FKbm4EwXTStfm0u-sGhDvDVUqNG8Cc7STtUJlawVAP057Jlg";
         $response = $client->request('POST', 'http://94.74.86.174:8080/api/login', [
             'headers' => [
                 'Accept' => 'application/json'
             ],
             'json' => [
-                'password' => $request->username,
-                'token' => 'eyJhbGciOiJIUzUxMiJ9.eyJyb2xlcyI6W119.i2OVQdxr08dmIqwP7cWOJk5Ye4fySFUqofl-w6FKbm4EwXTStfm0u-sGhDvDVUqNG8Cc7STtUJlawVAP057Jlg',
-                'username' => $request->password
+                'username' => $request->username,
+                // 'token' => 'eyJhbGciOiJIUzUxMiJ9.eyJyb2xlcyI6W119.i2OVQdxr08dmIqwP7cWOJk5Ye4fySFUqofl-w6FKbm4EwXTStfm0u-sGhDvDVUqNG8Cc7STtUJlawVAP057Jlg',
+                'password' => $request->password
             ]
         ]);
         $statusCode = $response->getStatusCode();
@@ -26,8 +27,10 @@ class ChecklistController extends Controller
         $data = json_decode($body, true);
         // $request->session()->put('token', $data->token);
         // dd($data);
+        return redirect()->route('checklist');
+        // dd($data);
 
-        return view('login', ['data' => $data]);
+        // return view('checklist', ['data' => $data]);
 
     }
     public function login(){
@@ -55,17 +58,27 @@ class ChecklistController extends Controller
     }
     public function getData()
     {
-        $client = new Client();
+        $client = new Client([
+            'headers' => [
+              'Authorization' =>  'Bearer ' . 'eyJhbGciOiJIUzUxMiJ9.eyJyb2xlcyI6W119.i2OVQdxr08dmIqwP7cWOJk5Ye4fySFUqofl-w6FKbm4EwXTStfm0u-sGhDvDVUqNG8Cc7STtUJlawVAP057Jlg',
+              'Content-Type'  =>  'application/json'
+          ],
+            'http_errors' => false
+        ]);
         $response = $client->request('GET', 'http://94.74.86.174:8080/api/checklist');
         $statusCode = $response->getStatusCode();
         $body = $response->getBody()->getContents();
 
         $data = json_decode($body, true);
+        dd($data);
 
         return view('checklist', ['data' => $data]);
     }
 
-    public function getItemCheklist($id)
+    
+    
+
+    public function getItemchecklist($id)
     {
         $client = new Client();
         $response = $client->request('GET', 'http://94.74.86.174:8080/api/checklist/' . $id, [
@@ -102,44 +115,44 @@ class ChecklistController extends Controller
         return redirect()->route('checklist')->with('success', 'Data Berhasil Ditambahkan');
     }
 
-    public function getEditChecklist($id)
-    {
-        $client = new Client();
-        $response = $client->request('GET', 'http://94.74.86.174:8080/api/checklist' . $id, [
-            'headers' => [
-                'Accept' => 'application/json'
-            ]
-        ]);
-        $statusCode = $response->getStatusCode();
-        $body = $response->getBody()->getContents();
+    // public function getEditChecklist($id)
+    // {
+    //     $client = new Client();
+    //     $response = $client->request('GET', 'http://94.74.86.174:8080/api/checklist' . $id, [
+    //         'headers' => [
+    //             'Accept' => 'application/json'
+    //         ]
+    //     ]);
+    //     $statusCode = $response->getStatusCode();
+    //     $body = $response->getBody()->getContents();
 
-        $data = json_decode($body, true);
-        // dd($data);
+    //     $data = json_decode($body, true);
+    //     // dd($data);
 
-        return view('edit', ['data' => $data]);
-    }
+    //     return view('edit', ['data' => $data]);
+    // }
 
-    public function editChecklist(Request $request, $id)
-    {
-        $client = new Client();
-        $response = $client->request('PUT', 'http://94.74.86.174:8080/api/checklist/' . $id,  [
-            'headers' => [
-                'Accept' => 'application/json'
-            ],
-            'json' => [
-                'name' => $request->name
-            ],
-        ]);
-        $statusCode = $response->getStatusCode();
-        $body = $response->getBody()->getContents();
+    // public function editChecklist(Request $request, $id)
+    // {
+    //     $client = new Client();
+    //     $response = $client->request('PUT', 'http://94.74.86.174:8080/api/checklist/' . $id,  [
+    //         'headers' => [
+    //             'Accept' => 'application/json'
+    //         ],
+    //         'json' => [
+    //             'name' => $request->name
+    //         ],
+    //     ]);
+    //     $statusCode = $response->getStatusCode();
+    //     $body = $response->getBody()->getContents();
 
-        $data = json_decode($body, true);
+    //     $data = json_decode($body, true);
 
 
-        return redirect()->route('cheklist')->with('success', 'Data Berhasil Di Update');
-    }
+    //     return redirect()->route('checklist')->with('success', 'Data Berhasil Di Update');
+    // }
 
-    public function deleteCheklist($id)
+    public function deleteChecklist($id)
     {
         $client = new Client();
         $response = $client->request('DELETE', 'http://94.74.86.174:8080/api/checklist/' . $id, [
@@ -153,7 +166,7 @@ class ChecklistController extends Controller
         $data = json_decode($body, true);
         // dd($data);
 
-        return redirect()->route('cheklist')->with('success', 'Data Berhasil Di Hapus');
+        return redirect()->route('checklist')->with('success', 'Data Berhasil Di Hapus');
 
     }
 }
