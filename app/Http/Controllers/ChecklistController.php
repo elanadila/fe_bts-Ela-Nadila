@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use GuzzleHttp\Client;
+use Illuminate\Support\Facades\Auth;
 
 class ChecklistController extends Controller
 {
@@ -33,6 +34,14 @@ class ChecklistController extends Controller
         // return view('checklist', ['data' => $data]);
 
     }
+    // public function authenticate(Request $request){
+    //     $credentials = $request->validate([
+    //         'email' => ['required', 'email'],
+    //         'password' => ['required'],
+    //     ]);
+
+    //     dd
+    // }
     public function login(){
 
         return view('login');
